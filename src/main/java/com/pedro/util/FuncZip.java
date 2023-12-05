@@ -7,14 +7,14 @@ import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-public class Compactador {
+public class FuncZip {
 
 	public static void compactar(String pastaOrigem, String arquivoZip) {
+		
 		try {
 			FileOutputStream fos = new FileOutputStream(arquivoZip);
 			ZipOutputStream zos = new ZipOutputStream(fos);
 
-			// Chama o método para compactar os arquivos da pasta
 			compactarPasta(zos, pastaOrigem, "");
 
 			zos.close();

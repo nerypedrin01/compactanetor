@@ -18,22 +18,23 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-public class EnviaEmail {
+public class FuncMail {
 
+	
 	public static void send(File pathArqZip, String destino) {
 
-		// Configurações do servidor de email
+	
 		String username = "";
 		String password = "";
 
-		// Configurações da sessão
+		System.out.println( "---Configurações da sessão--");
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
 		props.put("mail.smtp.host", ""); 
 		props.put("mail.smtp.port", "");
 
-		// Configurações da mensagem
+		System.out.println( "--- Iniciando Sessão ----");
 		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication(username, password);
@@ -41,18 +42,17 @@ public class EnviaEmail {
 		});
 
 		try {
-			// Criação da mensagem
+			System.out.println( "--- Criação da mensagem ----");
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(username));
 			message.setRecipients(Message.RecipientType.TO,
 					InternetAddress.parse(destino));
 			message.setSubject("Comprovantes");
 
-			// Parte do texto do email
 			BodyPart messageBodyPart = new MimeBodyPart();
-			messageBodyPart.setText("Conteúdo do email com anexo");
+//			messageBodyPart.setText("mensagem opicional");
 
-			// Parte do anexo
+
 			Multipart multipart = new MimeMultipart();
 			multipart.addBodyPart(messageBodyPart);
 
@@ -62,13 +62,12 @@ public class EnviaEmail {
 			messageBodyPart.setFileName(pathArqZip.getName());
 			multipart.addBodyPart(messageBodyPart);
 
-			// Adiciona as partes ao corpo da mensagem
+			
 			message.setContent(multipart);
 
-			// Envia a mensagem
 			Transport.send(message);
 
-			System.out.println("Email enviado com sucesso!");
+			System.out.println("----Email enviado com sucesso!----");
 
 		} catch (MessagingException e) {
 			e.printStackTrace();
