@@ -18,8 +18,9 @@ public class Funcoes {
 		if (criaMap) {
 			filesMap.put("302", new ArrayList<>());
 			filesMap.put("105", new ArrayList<>());
-			filesMap.put("GUARA", new ArrayList<>()); 
+			filesMap.put("GUARA", new ArrayList<>());
 			filesMap.put("PLANALTINA", new ArrayList<>());
+			filesMap.put("SUDOESTE", new ArrayList<>());
 			criaMap = false;
 		}
 
@@ -46,6 +47,11 @@ public class Funcoes {
 					&& file.getAbsolutePath().toUpperCase().contains("PLANALTINA")) {
 				System.out.println(file.getName());
 				filesMap.get("PLANALTINA").add(file);
+
+			} else if (file.getName().toUpperCase().contains("COMP")
+					&& file.getAbsolutePath().toUpperCase().contains("SUDOESTE")) {
+				System.out.println(file.getName());
+				filesMap.get("SUDOESTE").add(file);
 
 			}
 		}
@@ -120,7 +126,6 @@ public class Funcoes {
 	}
 
 	public static void run(String path) throws IOException {
-
 
 		System.out.println("--------Iniciando separação de arquivos-------");
 		separaComprovantesNaRaiz(path);
